@@ -1,3 +1,6 @@
+[user]
+	name = wooni-dev
+	email = wooni.dev@gmail.com
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -5,3 +8,4 @@
 	required = true
 [alias]
 	sweep = !git fetch --prune && git branch -vv | grep \": gone]\" | awk \"{print \\$1}\" | xargs -r git branch -d && git branch
+	drop-branch = "!f() { git branch -r | grep -q \"origin/$1\" || { echo \"Remote branch origin/$1 not found\"; exit 1; } && git branch -d $1 && git push origin --delete $1 && echo \"Done! Current branches:\" && git branch; }; f"
